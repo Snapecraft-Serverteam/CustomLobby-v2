@@ -1,0 +1,36 @@
+name: CustomLobby
+version: ${project.version}
+main: net.snapecraft.customlobby.CustomLobby
+commands:
+  c:
+    description: Gamemode 1.
+    alias: [gmc, gm1]
+  s:
+    description: Gamemode 0.
+  sp:
+    description: Gamemode 3.
+  nick:
+    description: Give a nickname
+    alias: [lobbynick, lnick, name]
+  nickplayer:
+    description: Give a nickname to an other player
+    alias: [lobbynickplayer, lnickplayer, nameother]
+  gui:
+    description: Oeffnet das GUI.
+  build:
+    description: Enables Build Mode
+  spawn:
+    description: TPs you to the spawn.
+    alias: [hub, lobby]
+  setspawn:
+    description: Sets the spawn to the config.yml
+  setwarp:
+    description: Sets the navigator's warps.
+  tpall:
+    description: Teleports all players to you.
+  clearall:
+    description: Kills all entitys in the world
+  connServer:
+    description: connect to specific server
+  fly:
+    description: Fliegen wie ein Vogel
