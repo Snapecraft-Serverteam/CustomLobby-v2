@@ -3,6 +3,7 @@ package net.snapecraft.customlobby.navigator;
 import net.snapecraft.customlobby.CustomLobby;
 import net.snapecraft.customlobby.utils.ItemAPI;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -34,11 +35,22 @@ public class Navigator {
 //        inv.setItem(20, ItemAPI.createItem(Material.FIREBALL, "§eNuke", (byte)0, 1));
 //        inv.setItem(24, ItemAPI.createSkull(p.getName(), "§4L§co§6b§eb§2y§as§bp§3i§1e§9l§de", 1));
 
-        for(String warp : CustomLobby.getInstance().getConfig().getConfigurationSection("warp").getKeys(true)) {
+        /*for(String warp : CustomLobby.getInstance().getConfig().getConfigurationSection("warp").getKeys(true)) {
             ConfigurationSection cs = CustomLobby.getInstance().getConfig().getConfigurationSection(warp);
             System.out.println(cs.getInt("slot"));
             System.out.println(cs.getString("item"));
             inv.setItem(cs.getInt("slot"), ItemAPI.createItem(Material.getMaterial(cs.getString("item")), warp, (byte) 0, 1));
+        }*/
+
+        ConfigurationSection navSection = CustomLobby.getInstance().getConfig().getConfigurationSection("navigator.row");
+        int slot = 0;
+        for (int j = 0; j < 4; j++) {
+            ConfigurationSection row = navSection.getConfigurationSection(Integer.toString(j));
+            for (int k = 0; k < 9; k++) {
+                ConfigurationSection obj = row.getConfigurationSection(Integer.toString(k));
+                inv.setItem(slot, ItemAPI.createItem(Material.getMaterial(obj.getString("material")), ChatColor.translateAlternateColorCodes('&', obj.getString("name")), (byte)obj.getInt("meta"), 1));
+                slot++;
+            }
         }
         p.openInventory(inv);
     }

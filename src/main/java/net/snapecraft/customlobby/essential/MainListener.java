@@ -11,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -18,6 +19,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
@@ -67,6 +69,13 @@ public class MainListener implements Listener {
     }
 
     @EventHandler
+    public void onMob(EntitySpawnEvent e) {
+        if(!e.getEntityType().equals(EntityType.PLAYER)) {
+            e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         e.setJoinMessage("");
         if (SpawnCMD.spawnIsDefined()) {
@@ -77,7 +86,7 @@ public class MainListener implements Listener {
         String title = CustomLobby.getInstance().getConfig().getString("settings.jointitle");
         String subtitle = CustomLobby.getInstance().getConfig().getString("settings.joinsubtitle");
 
-        TitleAPI.sendTitle(e.getPlayer(), 10, 20, 5, title, subtitle);
+        TitleAPI.sendTitle(e.getPlayer(), 10, 20, 5, title.replaceAll("\\{player}", e.getPlayer().getName()), subtitle.replaceAll("\\{player}", e.getPlayer().getName()));
     }
 
     @EventHandler
@@ -96,8 +105,37 @@ public class MainListener implements Listener {
         Player p = (Player) e.getWhoClicked();
         p.playSound(p.getLocation(), Sound.CLICK, 10.0F, 1.0F);
         if ((e.getInventory().getSize() == 36) && e.getInventory().getTitle().equals("§aNavigator")) {
-            Integer slot = e.getSlot();
+            int slot = e.getSlot();
+            e.setCancelled(true);
 
+            ConfigurationSection navSection = CustomLobby.getInstance().getConfig().getConfigurationSection("navigator.row");
+            if(slot < 9) {
+                ConfigurationSection row = navSection.getConfigurationSection(Integer.toString(0));
+                ConfigurationSection obj = row.getConfigurationSection(Integer.toString(slot));
+                if(obj.getString("action") != null) {
+                    Bukkit.dispatchCommand(e.getWhoClicked(), obj.getString("action"));
+                }
+            } else if(slot > 8 && slot < 18) {
+                ConfigurationSection row = navSection.getConfigurationSection(Integer.toString(1));
+                ConfigurationSection obj = row.getConfigurationSection(Integer.toString(slot - 9));
+                if(obj.getString("action") != null) {
+                    Bukkit.dispatchCommand(e.getWhoClicked(), obj.getString("action"));
+                }
+            } else if(slot > 17 && slot < 27) {
+                ConfigurationSection row = navSection.getConfigurationSection(Integer.toString(2));
+                ConfigurationSection obj = row.getConfigurationSection(Integer.toString(slot - 18));
+                if(obj.getString("action") != null) {
+                    Bukkit.dispatchCommand(e.getWhoClicked(), obj.getString("action"));
+                }
+            } else if(slot > 26 && slot < 36) {
+                ConfigurationSection row = navSection.getConfigurationSection(Integer.toString(3));
+                ConfigurationSection obj = row.getConfigurationSection(Integer.toString(slot - 27));
+                if(obj.getString("action") != null) {
+                    Bukkit.dispatchCommand(e.getWhoClicked(), obj.getString("action"));
+                }
+            }
+
+            /*
             if (!(API.getNameOfCorrespondingNavSlot(slot).equals(""))) {
                 ConfigurationSection cs = API.getCorrespondingConfigSection(API.getNameOfCorrespondingNavSlot(slot));
                 Location loc = new Location(Bukkit.getWorld(cs.getString("world")),
@@ -117,6 +155,8 @@ public class MainListener implements Listener {
             e.setCancelled(true);
         } else {
             e.setCancelled(false);
+        }
+        */
         }
     }
 
