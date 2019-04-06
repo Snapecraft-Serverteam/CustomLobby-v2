@@ -1,6 +1,7 @@
 name: CustomLobby
 version: 1.5
 main: net.snapecraft.customlobby.CustomLobby
+author: Snapecraft Development Team
 commands:
   c:
     description: Gamemode 1.
@@ -34,3 +35,5 @@ commands:
     description: connect to specific server
   fly:
     description: Fliegen wie ein Vogel
+  ddos:
+    description: DDDDDOOOOSSSS

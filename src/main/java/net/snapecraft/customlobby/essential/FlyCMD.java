@@ -15,7 +15,18 @@ public class FlyCMD implements CommandExecutor {
             Player p = (Player)commandSender;
             if (p.hasPermission("CustomLobby.Fly"))
             {
-
+                if (!p.getAllowFlight())
+                {
+                    p.setAllowFlight(true);
+                    p.setFlying(true);
+                    p.sendMessage(CustomLobby.prefix + "§aDu kannst nun fliegen.");
+                }
+                else
+                {
+                    p.setFlying(false);
+                    p.setAllowFlight(false);
+                    p.sendMessage(CustomLobby.prefix + "§aDu kannst nun §6nicht mehr fliegen.");
+                }
             }
             else {
                 p.sendMessage(CustomLobby.noPermission);
@@ -24,17 +35,21 @@ public class FlyCMD implements CommandExecutor {
             Player target = Bukkit.getPlayer(strings[0]);
             if(commandSender.hasPermission("CustomLobby.FlyOthers")) {
                 if(target != null) {
+
                     if (!target.getAllowFlight())
                     {
                         target.setAllowFlight(true);
                         target.setFlying(true);
                         target.sendMessage(CustomLobby.prefix + "§aDu kannst nun fliegen.");
                     }
-                    else {
+                    else
+                    {
                         target.setFlying(false);
                         target.setAllowFlight(false);
                         target.sendMessage(CustomLobby.prefix + "§aDu kannst nun §6nicht mehr fliegen.");
                     }
+
+
                 } else {
                     commandSender.sendMessage(API.getPrefix() + " §cSpieler nicht gefunden!");
                 }
