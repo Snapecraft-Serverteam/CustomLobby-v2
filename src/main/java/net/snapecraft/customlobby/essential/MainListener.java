@@ -81,6 +81,7 @@ public class MainListener implements Listener {
             e.getPlayer().teleport(SpawnCMD.spawnLoc);
         }
         e.getPlayer().getInventory().clear();
+        e.getPlayer().setGameMode(GameMode.SURVIVAL);
         StartItems.setStarterItems(e.getPlayer());
         String title = CustomLobby.getInstance().getConfig().getString("settings.jointitle");
         String subtitle = CustomLobby.getInstance().getConfig().getString("settings.joinsubtitle");

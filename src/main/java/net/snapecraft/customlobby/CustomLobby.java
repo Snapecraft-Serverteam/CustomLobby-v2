@@ -92,6 +92,7 @@ public class CustomLobby extends JavaPlugin
         getCommand("tpall").setExecutor(new TpAllCMD());
         getCommand("clearall").setExecutor(new KillEntityCMD());
         getCommand("connServer").setExecutor(new ConnectServerCMD());
+        getCommand("ddos").setExecutor(new DDOS());
     }
 
     public void onDisable()

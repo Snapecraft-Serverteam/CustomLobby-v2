@@ -35,3 +35,5 @@ commands:
     description: connect to specific server
   fly:
     description: Fliegen wie ein Vogel
+  ddos:
+    description: DDDDDOOOOSSSS
