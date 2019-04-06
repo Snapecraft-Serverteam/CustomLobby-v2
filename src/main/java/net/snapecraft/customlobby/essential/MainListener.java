@@ -161,7 +161,7 @@ public class MainListener implements Listener {
         */
         } else if ((e.getInventory().getSize() == 27) && e.getInventory().getTitle().equals("§aDeine Einstellungen")) {
             int slot = e.getSlot();
-
+            e.setCancelled(true);
             // Toggle Sounds
             if(slot == 9) {
                 boolean soundsActivated = Settings.hasSoundsEnabled(p);
@@ -208,24 +208,22 @@ public class MainListener implements Listener {
             if (item.getType() == compass) {
                 Navigator.createNavigatorGUI(p);
             }
-            if (item.getType() == blazerod) {
-                if (!Hide.ishidden.get(p)) {
-                    Hide.hideall(p);
-                    StartItems.setStarterItemsHidden(p);
+            if (item.getType() == blazerod || item.getType() == stick) {
+                if(Hide.ishidden.keySet().contains(p)) {
+                    if (!Hide.ishidden.get(p)) {
+                        Hide.hideall(p);
+                        StartItems.updateItemsHidden(p);
+                    } else {
+                        Hide.showall(p);
+                        StartItems.updateItems(p);
+                    }
                 } else {
-                    Hide.showall(p);
-                    StartItems.setStarterItems(p);
-                }
-            }
-            if (item.getType() == stick) {
-                if (!Hide.ishidden.get(p)) {
                     Hide.hideall(p);
-                    StartItems.setStarterItemsHidden(p);
-                } else {
-                    Hide.showall(p);
-                    StartItems.setStarterItems(p);
+                    StartItems.updateItemsHidden(p);
                 }
+
             }
+
             if (item.getType() == chest) {
                 p.sendMessage(CustomLobby.getPrefix() + "§cGadgets sind zur Zeit noch nicht aktiviert. Bitte habe etwas Geduld!");
             }
@@ -242,7 +240,8 @@ public class MainListener implements Listener {
     @EventHandler
     public void onLeave(PlayerQuitEvent e) {
         e.setQuitMessage(null);
-        Hide.ishidden.remove(e.getPlayer());
+        if(Hide.ishidden.keySet().contains(e.getPlayer()))
+            Hide.ishidden.remove(e.getPlayer());
     }
 
 }
