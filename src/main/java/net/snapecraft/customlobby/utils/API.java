@@ -87,4 +87,7 @@ public class API
         }
         return null;
     }
+    public static boolean reverseBoolean(boolean in) {
+        return !in;
+    }
 }

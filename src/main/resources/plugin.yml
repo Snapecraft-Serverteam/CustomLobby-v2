@@ -1,6 +1,7 @@
 name: CustomLobby
 version: ${project.version}
 main: net.snapecraft.customlobby.CustomLobby
+author: Snapecraft Development Team
 commands:
   c:
     description: Gamemode 1.

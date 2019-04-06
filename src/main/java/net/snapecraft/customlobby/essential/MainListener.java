@@ -4,11 +4,10 @@ import com.connorlinfoot.titleapi.TitleAPI;
 import net.snapecraft.customlobby.CustomLobby;
 import net.snapecraft.customlobby.hide.Hide;
 import net.snapecraft.customlobby.navigator.Navigator;
+import net.snapecraft.customlobby.settings.Settings;
+import net.snapecraft.customlobby.settings.SettingsMainGUI;
 import net.snapecraft.customlobby.utils.API;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
@@ -86,7 +85,9 @@ public class MainListener implements Listener {
         String title = CustomLobby.getInstance().getConfig().getString("settings.jointitle");
         String subtitle = CustomLobby.getInstance().getConfig().getString("settings.joinsubtitle");
 
-        TitleAPI.sendTitle(e.getPlayer(), 10, 20, 5, title.replaceAll("\\{player}", e.getPlayer().getName()), subtitle.replaceAll("\\{player}", e.getPlayer().getName()));
+        title = title.replaceAll("\\{player}", e.getPlayer().getName());
+        subtitle = subtitle.replaceAll("\\{player}", e.getPlayer().getName());
+        TitleAPI.sendTitle(e.getPlayer(), 10, 20, 5, ChatColor.translateAlternateColorCodes('&', title), ChatColor.translateAlternateColorCodes('&', subtitle));
     }
 
     @EventHandler
@@ -157,6 +158,25 @@ public class MainListener implements Listener {
             e.setCancelled(false);
         }
         */
+        } else if ((e.getInventory().getSize() == 27) && e.getInventory().getTitle().equals("§aDeine Einstellungen")) {
+            int slot = e.getSlot();
+
+            // Toggle Sounds
+            if(slot == 9) {
+                boolean soundsActivated = Settings.hasSoundsEnabled(p);
+                if(Settings.isInSoundsEnabledList(p)) {
+                    Settings.soundsEnabled.replace(p, API.reverseBoolean(soundsActivated));
+                } else {
+                    Settings.soundsEnabled.put(p, API.reverseBoolean(soundsActivated));
+                }
+                if(soundsActivated) {
+                    p.sendMessage(API.getPrefix() + " §aDie Sounds wurden erfolgreich deaktiviert!");
+                } else {
+                    p.sendMessage(API.getPrefix() + " §aDie Sounds wurden erfolgreich aktiviert!");
+                }
+                p.closeInventory();
+            }
+
         } else {
             if(!BuildModeCMD.buildmodeplayers.contains(p.getName())) {
                 e.setCancelled(true);
@@ -173,6 +193,7 @@ public class MainListener implements Listener {
         Material blazerod = Material.BLAZE_ROD;
         Material stick = Material.STICK;
         Material chest = Material.CHEST;
+        Material noteblock = Material.NOTE_BLOCK;
         Material skull = Material.SKULL_ITEM;
 
 
@@ -206,6 +227,12 @@ public class MainListener implements Listener {
             }
             if (item.getType() == chest) {
                 p.sendMessage(CustomLobby.getPrefix() + "§cGadgets sind zur Zeit noch nicht aktiviert. Bitte habe etwas Geduld!");
+            }
+            if (item.getType() == noteblock) {
+                Bukkit.dispatchCommand(p, "music");
+            }
+            if(item.getType() == skull) {
+                p.openInventory(SettingsMainGUI.createMainGui(p));
             }
             e.setCancelled(true);
         }
