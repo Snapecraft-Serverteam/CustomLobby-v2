@@ -143,7 +143,7 @@ public class MainListener implements Listener {
                 Navigator.createNavigatorGUI(p);
             }
             if (item.getType() == blazerod) {
-                if (!Hide.ishidden) {
+                if (!Hide.ishidden.get(p)) {
                     Hide.hideall(p);
                     StartItems.setStarterItemsHidden(p);
                 } else {
@@ -152,7 +152,7 @@ public class MainListener implements Listener {
                 }
             }
             if (item.getType() == stick) {
-                if (!Hide.ishidden) {
+                if (!Hide.ishidden.get(p)) {
                     Hide.hideall(p);
                     StartItems.setStarterItemsHidden(p);
                 } else {
