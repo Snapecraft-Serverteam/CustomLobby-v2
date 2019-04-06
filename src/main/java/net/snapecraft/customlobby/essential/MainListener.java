@@ -104,7 +104,8 @@ public class MainListener implements Listener {
         CustomLobby.getInstance().saveConfig();
         CustomLobby.getInstance().reloadConfig();
         Player p = (Player) e.getWhoClicked();
-        p.playSound(p.getLocation(), Sound.CLICK, 10.0F, 1.0F);
+        if(Settings.hasSoundsEnabled(p))
+            p.playSound(p.getLocation(), Sound.CLICK, 10.0F, 1.0F);
         if ((e.getInventory().getSize() == 36) && e.getInventory().getTitle().equals("§aNavigator")) {
             int slot = e.getSlot();
             e.setCancelled(true);
