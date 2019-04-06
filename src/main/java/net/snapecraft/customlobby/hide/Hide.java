@@ -4,8 +4,10 @@ import net.snapecraft.customlobby.CustomLobby;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
+
 public class Hide {
-    public static boolean ishidden = false;
+    public static HashMap<Player, Boolean> ishidden = new HashMap<>();
 
     public static void hideall(Player p)
     {
@@ -13,7 +15,12 @@ public class Hide {
         for (Player f : Bukkit.getOnlinePlayers())
         {
             p.hidePlayer(f);
-            ishidden = true;
+            if(ishidden.containsKey(p)) {
+                ishidden.remove(p);
+                ishidden.put(p, true);
+            } else {
+                ishidden.put(p, true);
+            }
         }
     }
 
@@ -23,7 +30,12 @@ public class Hide {
         for (Player f : Bukkit.getOnlinePlayers())
         {
             p.showPlayer(f);
-            ishidden = false;
+            if(ishidden.containsKey(p)) {
+                ishidden.remove(p);
+                ishidden.put(p, false);
+            } else {
+                ishidden.put(p, false);
+            }
         }
     }
 }

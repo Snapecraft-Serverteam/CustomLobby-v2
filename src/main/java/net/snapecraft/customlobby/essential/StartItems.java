@@ -38,9 +38,4 @@ public class StartItems {
         p.getInventory().setItem(8, profile);
     }
 
-    public static void setBuildmodeItems(Player p) {
-        ItemStack buildBlock = ItemAPI.createItem(Material.BRICK, "§aBaumodus", (byte)0, 1);
-        p.getInventory().clear();
-        p.getInventory().setItem(2, buildBlock);
-    }
 }

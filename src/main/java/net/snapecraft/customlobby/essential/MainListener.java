@@ -29,15 +29,13 @@ import org.bukkit.inventory.ItemStack;
 
 public class MainListener implements Listener {
     @EventHandler
-    public void onHunger(FoodLevelChangeEvent e)
-    {
+    public void onHunger(FoodLevelChangeEvent e) {
         e.setCancelled(true);
         e.setFoodLevel(20);
     }
 
     @EventHandler
-    public void onDamage(EntityDamageEvent e)
-    {
+    public void onDamage(EntityDamageEvent e) {
         if (!KillEntityCMD.allowKills) {
             e.setCancelled(true);
         } else {
@@ -45,18 +43,16 @@ public class MainListener implements Listener {
         }
     }
 
-    @EventHandler(priority= EventPriority.HIGHEST)
-    public void onWeatherChange(WeatherChangeEvent event)
-    {
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onWeatherChange(WeatherChangeEvent event) {
         boolean rain = event.toWeatherState();
         if (rain) {
             event.setCancelled(true);
         }
     }
 
-    @EventHandler(priority=EventPriority.HIGHEST)
-    public void onThunderChange(ThunderChangeEvent event)
-    {
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onThunderChange(ThunderChangeEvent event) {
         boolean storm = event.toThunderState();
         if (storm) {
             event.setCancelled(true);
@@ -64,16 +60,14 @@ public class MainListener implements Listener {
     }
 
     @EventHandler
-    public void onPickup(PlayerPickupItemEvent e)
-    {
+    public void onPickup(PlayerPickupItemEvent e) {
         if (!e.getPlayer().hasPermission("CustomLobby.pickupItems")) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent e)
-    {
+    public void onJoin(PlayerJoinEvent e) {
         e.setJoinMessage("");
         if (SpawnCMD.spawnIsDefined()) {
             e.getPlayer().teleport(SpawnCMD.spawnLoc);
@@ -87,8 +81,7 @@ public class MainListener implements Listener {
     }
 
     @EventHandler
-    public void onDrop(PlayerDropItemEvent e)
-    {
+    public void onDrop(PlayerDropItemEvent e) {
         if (!BuildModeCMD.buildmodeplayers.contains(e.getPlayer().getName())) {
             e.setCancelled(true);
         } else {
@@ -97,16 +90,15 @@ public class MainListener implements Listener {
     }
 
     @EventHandler
-    public void onInvClick(InventoryClickEvent e)
-    {
+    public void onInvClick(InventoryClickEvent e) {
         CustomLobby.getInstance().saveConfig();
         CustomLobby.getInstance().reloadConfig();
-        Player p = (Player)e.getWhoClicked();
+        Player p = (Player) e.getWhoClicked();
         p.playSound(p.getLocation(), Sound.CLICK, 10.0F, 1.0F);
         if ((e.getInventory().getSize() == 36) && e.getInventory().getTitle().equals("§aNavigator")) {
             Integer slot = e.getSlot();
 
-            if(!(API.getNameOfCorrespondingNavSlot(slot).equals(""))) {
+            if (!(API.getNameOfCorrespondingNavSlot(slot).equals(""))) {
                 ConfigurationSection cs = API.getCorrespondingConfigSection(API.getNameOfCorrespondingNavSlot(slot));
                 Location loc = new Location(Bukkit.getWorld(cs.getString("world")),
                         cs.getDouble("X"),
@@ -129,18 +121,19 @@ public class MainListener implements Listener {
     }
 
     @Deprecated
-    @EventHandler(priority=EventPriority.HIGHEST)
-    public void onInteract(PlayerInteractEvent e)
-    {
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         ItemStack item = p.getItemInHand();
         Material compass = Material.COMPASS;
         Material blazerod = Material.BLAZE_ROD;
+        Material stick = Material.STICK;
         Material chest = Material.CHEST;
         Material skull = Material.SKULL_ITEM;
+
+
         if (e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            if (BuildModeCMD.buildmodeplayers.contains(p.getName()))
-            {
+            if (BuildModeCMD.buildmodeplayers.contains(p.getName())) {
                 e.setCancelled(false);
             }
             if (item == null) {
@@ -158,27 +151,26 @@ public class MainListener implements Listener {
                     StartItems.setStarterItems(p);
                 }
             }
-            if (item.getType() == chest)
-            {
+            if (item.getType() == stick) {
+                if (!Hide.ishidden) {
+                    Hide.hideall(p);
+                    StartItems.setStarterItemsHidden(p);
+                } else {
+                    Hide.showall(p);
+                    StartItems.setStarterItems(p);
+                }
+            }
+            if (item.getType() == chest) {
                 p.sendMessage(CustomLobby.getPrefix() + "§cGadgets sind zur Zeit noch nicht aktiviert. Bitte habe etwas Geduld!");
             }
             e.setCancelled(true);
         }
     }
+
     @EventHandler
-    public void onSneakToggle(PlayerToggleSneakEvent e) {
-        if(e.isSneaking()) {
-            if(e.getPlayer().hasPermission("CustomLobby.BuildModeCMD")) {
-                if(e.getPlayer().getItemInHand().getType() == Material.BLAZE_ROD) {
-                    StartItems.setBuildmodeItems(e.getPlayer());
-                }
-            }
-        } else {
-            if (!Hide.ishidden) {
-                StartItems.setStarterItemsHidden(e.getPlayer());
-            } else {
-                StartItems.setStarterItems(e.getPlayer());
-            }
-        }
+    public void onLeave(PlayerQuitEvent e) {
+        e.setQuitMessage(null);
+        Hide.ishidden.remove(e.getPlayer());
     }
+
 }

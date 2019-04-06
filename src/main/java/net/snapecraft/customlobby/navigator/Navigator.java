@@ -36,6 +36,8 @@ public class Navigator {
 
         for(String warp : CustomLobby.getInstance().getConfig().getConfigurationSection("warp").getKeys(true)) {
             ConfigurationSection cs = CustomLobby.getInstance().getConfig().getConfigurationSection(warp);
+            System.out.println(cs.getInt("slot"));
+            System.out.println(cs.getString("item"));
             inv.setItem(cs.getInt("slot"), ItemAPI.createItem(Material.getMaterial(cs.getString("item")), warp, (byte) 0, 1));
         }
         p.openInventory(inv);
