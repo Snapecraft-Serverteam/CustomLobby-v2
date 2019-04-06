@@ -157,6 +157,10 @@ public class MainListener implements Listener {
             e.setCancelled(false);
         }
         */
+        } else {
+            if(!BuildModeCMD.buildmodeplayers.contains(p.getName())) {
+                e.setCancelled(true);
+            }
         }
     }
 
