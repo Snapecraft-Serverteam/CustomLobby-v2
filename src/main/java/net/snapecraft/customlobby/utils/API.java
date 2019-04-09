@@ -1,5 +1,7 @@
 package net.snapecraft.customlobby.utils;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import net.snapecraft.customlobby.CustomLobby;
 import org.bukkit.Material;
@@ -89,5 +91,35 @@ public class API
     }
     public static boolean reverseBoolean(boolean in) {
         return !in;
+    }
+    public static String randomSkull() {
+        CustomLobby.getInstance().saveConfig();
+        CustomLobby.getInstance().reloadConfig();
+        List<String> heads = CustomLobby.getInstance().getConfig().getStringList("headlist");
+        Random random = new Random();
+        return heads.get(random.nextInt(heads.size()));
+    }
+
+    @SuppressWarnings("Duplicates")
+    public static Material randomBoot() {
+        List<Material> boots = new ArrayList<>();
+        boots.add(Material.LEATHER_BOOTS);
+        boots.add(Material.CHAINMAIL_BOOTS);
+        boots.add(Material.GOLD_BOOTS);
+        boots.add(Material.IRON_BOOTS);
+        boots.add(Material.DIAMOND_BOOTS);
+        Random random = new Random();
+        return  boots.get(random.nextInt(boots.size()));
+    }
+
+    @SuppressWarnings("Duplicates")
+    public static List<Material> getBoots() {
+        List<Material> boots = new ArrayList<>();
+        boots.add(Material.LEATHER_BOOTS);
+        boots.add(Material.CHAINMAIL_BOOTS);
+        boots.add(Material.GOLD_BOOTS);
+        boots.add(Material.IRON_BOOTS);
+        boots.add(Material.DIAMOND_BOOTS);
+        return boots;
     }
 }

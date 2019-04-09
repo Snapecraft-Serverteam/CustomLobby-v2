@@ -9,6 +9,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class CustomLobby extends JavaPlugin
 {
@@ -64,6 +67,16 @@ public class CustomLobby extends JavaPlugin
         getConfig().addDefault("warp.default.PITCH", 1);
         getConfig().addDefault("warp.default.YAW", 1);
 
+        List<String> headlist = new ArrayList<>();
+        headlist.add("Mario");
+        headlist.add("Pikachu");
+        headlist.add("Tallerik");
+        headlist.add("Pepe44");
+        headlist.add("MayusYT");
+        headlist.add("NoveFerrero");
+        headlist.add("MHF_Pumpkin");
+        headlist.add("MHF_Chicken");
+        getConfig().addDefault("headlist", headlist);
 
         getConfig().options().copyDefaults(true);
         saveConfig();
