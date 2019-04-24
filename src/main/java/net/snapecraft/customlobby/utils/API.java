@@ -35,8 +35,7 @@ public class API
         return CustomLobby.getInstance().getDescription().getFullName();
     }
 
-    public static PluginDescriptionFile getPluginDescriptionObject()
-    {
+    public static PluginDescriptionFile getPluginDescriptionObject() {
         return CustomLobby.getInstance().getDescription();
     }
 

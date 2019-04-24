@@ -20,7 +20,6 @@ public class GadgetsInventory {
             inv.setItem(i, ItemAPI.createItem(Material.STAINED_GLASS_PANE, " ", (byte)3, 1));
         }
 
-
         // Head Item
         inv.setItem(9, ItemAPI.createSkull(API.randomSkull(), "§2Köpfe", 1));
 

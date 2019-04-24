@@ -3,7 +3,6 @@ package net.snapecraft.customlobby.essential;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import net.snapecraft.customlobby.CustomLobby;
-import net.snapecraft.customlobby.utils.API;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,7 +20,6 @@ public class ConnectServerCMD implements CommandExecutor {
                 ByteArrayDataOutput out = ByteStreams.newDataOutput();
                 out.writeUTF("Connect");
                 out.writeUTF(args[0]);
-
                 p.sendPluginMessage(CustomLobby.getInstance(), "BungeeCord", out.toByteArray());
             }
         }

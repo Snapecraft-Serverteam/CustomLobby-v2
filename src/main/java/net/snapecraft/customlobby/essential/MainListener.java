@@ -11,11 +11,9 @@ import net.snapecraft.customlobby.settings.Settings;
 import net.snapecraft.customlobby.settings.SettingsMainGUI;
 import net.snapecraft.customlobby.utils.API;
 import org.bukkit.*;
-import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -27,11 +25,9 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.weather.ThunderChangeEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
 
 public class MainListener implements Listener {
     @EventHandler
@@ -145,30 +141,6 @@ public class MainListener implements Listener {
                 }
             }
 
-            /*
-            if (!(API.getNameOfCorrespondingNavSlot(slot).equals(""))) {
-                ConfigurationSection cs = API.getCorrespondingConfigSection(API.getNameOfCorrespondingNavSlot(slot));
-                Location loc = new Location(Bukkit.getWorld(cs.getString("world")),
-                        cs.getDouble("X"),
-                        cs.getDouble("Y"),
-                        cs.getDouble("Z"),
-                        Float.parseFloat(cs.getString("YAW")),
-                        Float.parseFloat(cs.getString("PITCH")));
-                p.teleport(loc);
-            }
-        }
-        if ((!e.getInventory().getName().equalsIgnoreCase("§2Gadget§r - §bShop")) || (
-
-                (!e.getInventory().getName().equalsIgnoreCase("§9Profil, Freunde und Parties")) ||
-
-                        (!BuildModeCMD.buildmodeplayers.contains(p.getName())))) {
-            e.setCancelled(true);
-        } else {
-            e.setCancelled(false);
-        }
-        */
-
-
             // SETTINGS
         } else if ((e.getInventory().getSize() == 27) && e.getInventory().getTitle().equals("§aDeine Einstellungen")) {
             int slot = e.getSlot();
@@ -188,7 +160,6 @@ public class MainListener implements Listener {
                 }
                 p.closeInventory();
             }
-
 
             // GADGETS
         } else if((e.getInventory().getSize() == 27) && e.getInventory().getTitle().equals("§aDeine Gadgets")) {

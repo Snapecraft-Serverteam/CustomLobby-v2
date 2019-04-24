@@ -10,7 +10,6 @@ public class NavigatorCommandListener implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args)
     {
         Navigator.createNavigatorGUI((Player)commandSender);
-
         return true;
     }
 }
