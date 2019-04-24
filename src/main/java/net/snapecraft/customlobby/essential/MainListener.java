@@ -223,6 +223,7 @@ public class MainListener implements Listener {
             e.setCancelled(true);
             if(e.getCurrentItem() != null) {
                 if(e.getCurrentItem().getType().equals(Material.BARRIER)) {
+                    removeEffects((Player) e.getWhoClicked(), "boots");
                     e.getWhoClicked().getInventory().setBoots(null);
                     e.getWhoClicked().sendMessage(API.getPrefix() + " §aDeine Schuhe wurde entfernt");
                 } else {
@@ -323,30 +324,38 @@ public class MainListener implements Listener {
             }
             e.setCancelled(true);
         }
+        if (BuildModeCMD.buildmodeplayers.contains(p.getName())) {
+            e.setCancelled(false);
+        }
     }
 
     @EventHandler
     public void onLeave(PlayerQuitEvent e) {
         e.setQuitMessage(null);
-
-        // Effects: Boots
-        if(e.getPlayer().getInventory().getBoots() != null) {
-            if(e.getPlayer().getInventory().getBoots().getType().equals(Material.DIAMOND_BOOTS))
-                e.getPlayer().setAllowFlight(false);
-            if(e.getPlayer().getInventory().getBoots().getType().equals(Material.GOLD_BOOTS))
-                e.getPlayer().removePotionEffect(PotionEffectType.SPEED);
-            if(e.getPlayer().getInventory().getBoots().getType().equals(Material.LEATHER_BOOTS))
-                e.getPlayer().removePotionEffect(PotionEffectType.INVISIBILITY);
-            if(e.getPlayer().getInventory().getBoots().getType().equals(Material.IRON_BOOTS))
-                e.getPlayer().removePotionEffect(PotionEffectType.JUMP);
-        }
-
-
-
+        removeEffects(e.getPlayer(), "all");
         e.getPlayer().getInventory().setBoots(null);
         e.getPlayer().getInventory().setHelmet(null);
         if(Hide.ishidden.keySet().contains(e.getPlayer()))
             Hide.ishidden.remove(e.getPlayer());
+    }
+
+    public void removeEffects(Player p, String what) {
+        if(what.contains("boots") || what.contains("all")) {
+            // Effects: Boots
+            if(p.getInventory().getBoots() != null) {
+                if(p.getInventory().getBoots().getType().equals(Material.DIAMOND_BOOTS)) {
+                    p.setAllowFlight(false);
+                    p.setFlying(false);
+                }
+                if(p.getInventory().getBoots().getType().equals(Material.GOLD_BOOTS))
+                    p.removePotionEffect(PotionEffectType.SPEED);
+                if(p.getInventory().getBoots().getType().equals(Material.LEATHER_BOOTS))
+                    p.removePotionEffect(PotionEffectType.INVISIBILITY);
+                if(p.getInventory().getBoots().getType().equals(Material.IRON_BOOTS))
+                    p.removePotionEffect(PotionEffectType.JUMP);
+            }
+        }
+
     }
 
 }
