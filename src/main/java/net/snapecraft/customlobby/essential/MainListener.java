@@ -183,9 +183,11 @@ public class MainListener implements Listener {
                 } else {
                     if(e.getCurrentItem().getType().equals(Material.SKULL_ITEM)) {
                         if(e.getSlot() < 36) {
-                            e.getWhoClicked().getInventory().setHelmet(e.getCurrentItem());
-                            e.getWhoClicked().sendMessage(API.getPrefix() + " §cDein Kopf wurde gesetzt");
-                            e.getWhoClicked().closeInventory();
+                            if(e.getWhoClicked().hasPermission("CustomLobby.skull." + e.getCurrentItem().getItemMeta().getDisplayName())) {
+                                e.getWhoClicked().getInventory().setHelmet(e.getCurrentItem());
+                                e.getWhoClicked().sendMessage(API.getPrefix() + " §cDein Kopf wurde gesetzt");
+                                e.getWhoClicked().closeInventory();
+                            }
                         }
                     }
                 }
@@ -198,41 +200,61 @@ public class MainListener implements Listener {
                     e.getWhoClicked().getInventory().setBoots(null);
                     e.getWhoClicked().sendMessage(API.getPrefix() + " §aDeine Schuhe wurde entfernt");
                 } else {
+
                     if(e.getCurrentItem().getType().equals(Material.LEATHER_BOOTS)) {
-                        e.getWhoClicked().getInventory().setBoots(new ItemStack(Material.LEATHER_BOOTS));
-                        e.getWhoClicked().sendMessage(API.getPrefix() + " §aDu hast neue Schuhe angezogen");
-                        e.getWhoClicked().closeInventory();
-                        //Unsichtbar
-                        PotionEffect effect = new PotionEffect(PotionEffectType.INVISIBILITY, -1, 3, true, false);
-                        e.getWhoClicked().addPotionEffect(effect);
+                        if(e.getWhoClicked().hasPermission("CustomLobby.boot.leather")) {
+                            e.getWhoClicked().getInventory().setBoots(new ItemStack(Material.LEATHER_BOOTS));
+                            e.getWhoClicked().sendMessage(API.getPrefix() + " §aDu hast neue Schuhe angezogen");
+                            e.getWhoClicked().closeInventory();
+                            //Unsichtbar
+                            PotionEffect effect = new PotionEffect(PotionEffectType.INVISIBILITY, -1, 3, true, false);
+                            e.getWhoClicked().addPotionEffect(effect);
+                        } else {
+                            e.getWhoClicked().sendMessage(API.getNoPermString());
+                        }
                     }
                     if(e.getCurrentItem().getType().equals(Material.CHAINMAIL_BOOTS)) {
-                        e.getWhoClicked().getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
-                        e.getWhoClicked().sendMessage(API.getPrefix() + " §aDu hast neue Schuhe angezogen");
-                        e.getWhoClicked().closeInventory();
+                        if(e.getWhoClicked().hasPermission("CustomLobby.boot.chainmail")) {
+                            e.getWhoClicked().getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
+                            e.getWhoClicked().sendMessage(API.getPrefix() + " §aDu hast neue Schuhe angezogen");
+                            e.getWhoClicked().closeInventory();
+                        } else {
+                            e.getWhoClicked().sendMessage(API.getNoPermString());
+                        }
                     }
                     if(e.getCurrentItem().getType().equals(Material.IRON_BOOTS)) {
-                        e.getWhoClicked().getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-                        e.getWhoClicked().sendMessage(API.getPrefix() + " §aDu hast neue Schuhe angezogen");
-                        e.getWhoClicked().closeInventory();
-                        //Jump
-                        PotionEffect effect = new PotionEffect(PotionEffectType.JUMP, -1, 9, true, false);
-                        e.getWhoClicked().addPotionEffect(effect);
+                        if(e.getWhoClicked().hasPermission("CustomLobby.boot.iron")) {
+                            e.getWhoClicked().getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
+                            e.getWhoClicked().sendMessage(API.getPrefix() + " §aDu hast neue Schuhe angezogen");
+                            e.getWhoClicked().closeInventory();
+                            //Jump
+                            PotionEffect effect = new PotionEffect(PotionEffectType.JUMP, -1, 9, true, false);
+                            e.getWhoClicked().addPotionEffect(effect);
+                        } else {
+                            e.getWhoClicked().sendMessage(API.getNoPermString());
+                        }
                     }
                     if(e.getCurrentItem().getType().equals(Material.GOLD_BOOTS)) {
-                        e.getWhoClicked().getInventory().setBoots(new ItemStack(Material.GOLD_BOOTS));
-                        e.getWhoClicked().sendMessage(API.getPrefix() + " §aDu hast neue Schuhe angezogen");
-                        e.getWhoClicked().closeInventory();
-                        // Speed
-                        PotionEffect effect = new PotionEffect(PotionEffectType.SPEED, -1, 3, true, false);
-                        e.getWhoClicked().addPotionEffect(effect);
+                        if(e.getWhoClicked().hasPermission("CustomLobby.boot.iron")) {
+                            e.getWhoClicked().getInventory().setBoots(new ItemStack(Material.GOLD_BOOTS));
+                            e.getWhoClicked().sendMessage(API.getPrefix() + " §aDu hast neue Schuhe angezogen");
+                            e.getWhoClicked().closeInventory();
+                            // Speed
+                            ((Player) e.getWhoClicked()).setWalkSpeed(1.5f);
+                        } else {
+                            e.getWhoClicked().sendMessage(API.getNoPermString());
+                        }
                     }
                     if(e.getCurrentItem().getType().equals(Material.DIAMOND_BOOTS)) {
-                        e.getWhoClicked().getInventory().setBoots(new ItemStack(Material.DIAMOND_BOOTS));
-                        e.getWhoClicked().sendMessage(API.getPrefix() + " §aDu hast neue Schuhe angezogen");
-                        e.getWhoClicked().closeInventory();
-                        // Creative Fly
-                        ((Player) e.getWhoClicked()).setAllowFlight(true);
+                        if(e.getWhoClicked().hasPermission("CustomLobby.boot.iron")) {
+                            e.getWhoClicked().getInventory().setBoots(new ItemStack(Material.DIAMOND_BOOTS));
+                            e.getWhoClicked().sendMessage(API.getPrefix() + " §aDu hast neue Schuhe angezogen");
+                            e.getWhoClicked().closeInventory();
+                            // Creative Fly
+                            ((Player) e.getWhoClicked()).setAllowFlight(true);
+                        } else {
+                            e.getWhoClicked().sendMessage(API.getNoPermString());
+                        }
                     }
 
                 }
@@ -319,7 +341,7 @@ public class MainListener implements Listener {
                     p.setFlying(false);
                 }
                 if(p.getInventory().getBoots().getType().equals(Material.GOLD_BOOTS))
-                    p.removePotionEffect(PotionEffectType.SPEED);
+                    p.setWalkSpeed(1f);
                 if(p.getInventory().getBoots().getType().equals(Material.LEATHER_BOOTS))
                     p.removePotionEffect(PotionEffectType.INVISIBILITY);
                 if(p.getInventory().getBoots().getType().equals(Material.IRON_BOOTS))
