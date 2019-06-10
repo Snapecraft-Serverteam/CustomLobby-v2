@@ -16,7 +16,7 @@ import java.util.List;
 public class CustomLobby extends JavaPlugin
 {
     public static String prefix = "PREFIX";
-    public static final String noPermission = prefix + "§cDu hast nicht die nötige Berechtigung, um diesen Befehl auszuführen";
+    public static String noPermission = "§cDu hast nicht die nötige Berechtigung, um diesen Befehl auszuführen";
     public static CustomLobby instance;
 
     public void onEnable()
@@ -82,6 +82,9 @@ public class CustomLobby extends JavaPlugin
         saveConfig();
         reloadConfig();
         prefix = getConfig().getString("settings.prefix");
+        if(!prefix.equals("PREFIX")) {
+            noPermission = prefix + "§cDu hast nicht die nötige Berechtigung, um diesen Befehl auszuführen";
+        }
     }
 
     private void init()
