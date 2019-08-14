@@ -37,3 +37,5 @@ commands:
     description: Fliegen wie ein Vogel
   ddos:
     description: DDDDDOOOOSSSS
+  server:
+    description: Overwrite open Navigator

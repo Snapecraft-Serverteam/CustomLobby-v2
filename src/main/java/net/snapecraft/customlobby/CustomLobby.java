@@ -101,6 +101,7 @@ public class CustomLobby extends JavaPlugin
         getCommand("s").setExecutor(new GamemodeCMD());
         getCommand("sp").setExecutor(new GamemodeCMD());
         getCommand("gui").setExecutor(new NavigatorCommandListener());
+        getCommand("server").setExecutor(new NavigatorCommandListener());
         getCommand("setwarp").setExecutor(new SetNavigatorWarpsCMD());
         getCommand("build").setExecutor(new BuildModeCMD());
         getCommand("spawn").setExecutor(new SpawnCMD());
