@@ -1,0 +1,200 @@
+Title On Join: false
+Title Message: Welcome
+Subtitle Message: '%player% to my server'
+Tab Header Enabled: false
+Tab Header Message: My Server
+Tab Footer Message: My IP
+player:
+  DEFAULT:
+    exist: false
+spawn:
+  exist: true
+  WORLD: Lobby-1
+  x: 0
+  y: 0
+  z: 0
+  YAW: 1.1999719
+  PITCH: 5.099999
+  X: -101.50712524974941
+  Y: 19.0
+  Z: -148.30174248776473
+SQL:
+  host: localhost
+  user: customlobby
+  pw: dbcustomSnapelobby18v
+  db: CustomLobby
+settings:
+  doublejump: 0.5
+  prefix: §7[§3Lobby§7]§5 > §r
+  jointitle: Willkommen, {player}
+  joinsubtitle: auf Snapecraft.net!
+  enableHalloween: false
+  freeRankCount: 0
+warp:
+  default:
+    slot: 1
+    item: GRASS
+    world: world
+    X: 1
+    Y: 1
+    Z: 1
+    PITCH: 1
+    YAW: 1
+headlist:
+- Mario
+- Pikachu
+- Tallerik
+- Pepe44
+- MayusYT
+- NoveFerrero
+- MHF_Pumpkin
+- MHF_Chicken
+navigator:
+  name: '&3Navigator'
+  row:
+    '0':
+      '0':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '1':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '2':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '3':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '4':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '5':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '6':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '7':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '8':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+    '1':
+      '0':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '1':
+        name: '&aSky&7Block'
+        material: GRASS
+        action: connserver Skyblock-*
+      '2':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '3':
+        name: '&4City&bBuild'
+        material: BRICK
+        action: warp portal
+      '4':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '5':
+        name: '&3Sky&7Wars'
+        material: CHEST
+        #action: connserver skywars1
+      '6':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '7':
+        name: '&cKnockback&aFFA'
+        material: IRON_SWORD
+        action: connserver KnockBackFFA-*
+      '8':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+    '2':
+      '0':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '1':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '2':
+        name: '&eNuke'
+        material: FIREBALL
+      '3':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '4':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '5':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '6':
+        name: '&4L&co&6b&eb&2y&as&bp&3i&1e&9l&de'
+        material: SKULL_ITEM
+      '7':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '8':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+    '3':
+      '0':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '1':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '2':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '3':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '4':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '5':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '6':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '7':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
+      '8':
+        name: ' '
+        material: STAINED_GLASS_PANE
+        meta: 3
