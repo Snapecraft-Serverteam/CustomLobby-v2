@@ -77,7 +77,7 @@ public class MainListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        e.setJoinMessage("");
+        e.setJoinMessage("§8[§2+§8] §7" + e.getPlayer().getName());
         if (SpawnCMD.spawnIsDefined()) {
             e.getPlayer().teleport(SpawnCMD.spawnLoc);
         }

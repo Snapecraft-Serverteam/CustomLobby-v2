@@ -38,4 +38,16 @@ public class Hide {
             }
         }
     }
+
+    public static Boolean doesPlayerHideAll(Player p) {
+        if(ishidden.containsKey(p)) {
+            if(ishidden.get(p)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }
