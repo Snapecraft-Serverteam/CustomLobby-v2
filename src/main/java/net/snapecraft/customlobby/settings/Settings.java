@@ -11,7 +11,7 @@ public class Settings {
         if(Settings.soundsEnabled.keySet().contains(p)) {
             return Settings.soundsEnabled.get(p);
         } else {
-            return true;
+            return false;
         }
     }
     public static boolean isInSoundsEnabledList(Player p) {
